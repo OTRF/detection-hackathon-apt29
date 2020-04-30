@@ -79,6 +79,7 @@ Number of events per Sysmon event Ids.
 
 Top 20 Event Ids
 
+```
 +-------+-----+----+
 |EventID|count|%   |
 +-------+-----+----+
@@ -103,3 +104,4 @@ Top 20 Event Ids
 |5145   |114  |0.2 |
 |5140   |59   |0.1 |
 +-------+-----+----+
+```
