@@ -1,5 +1,7 @@
 # APT29 Evals Detection Hackathon May 2nd, 2020
 
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/OTRF/detection-hackathon-apt29/master)
+
 Place for resources used during the Mordor Detection hackathon event featuring APT29 ATT&CK evals datasets.
 
 # Agenda
