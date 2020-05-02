@@ -9,7 +9,7 @@ Place for resources used during the Mordor Detection hackathon event featuring A
 | 10:00 - 10:10 | Greet the community | General | Live Team Event |
 | 10:10 - 10:20 | Getting started and Guidelines | General | Live Team Event |
 | 10:20 - 10:40 | APT29 Environment & Datasets Overview | General | Live Team Event |
-| 10:40 - 11:30 | Open infrasture for open research! | Live Event |
+| 10:40 - 11:30 | Open infrastructure for open research! | General | Live Team Event |
 | 11:30 - 12:00 | Break | Break | Break |
 | 12:00 - 12:15 | Basic Analysis with Jupyter Notebooks | Collaboration | Regular Teams |
 | 12:15 - 12:45 | Sigma & Zeek Integration | Collaboration | Regular Teams |
