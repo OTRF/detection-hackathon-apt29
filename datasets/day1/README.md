@@ -8,7 +8,7 @@ Welcome to the datasets section of this **Detection Hackathon**. Get familiarize
 
 | Type | Scenario | Dataset | Size | Timestamp |
 |--- |--- |--- |--- |---|
-| Host | Day 1 | [evals_apt29_day1_manual.zip](evals_apt29_day1_manual.zip) | 805M | 2020-04-29200743 |
+| Host | Day 1 | [evals_apt29_evals_day1_manual.zip](evals_apt29_evals_day1_manual.zip) | 805M | 2020-04-29200743 |
 | Network | Day 1 | [scranton.zip](pcaps/SCRANTON.zip) | 348M | 2020-04-30235600 |
 | Network | Day 1 | [nashua.zip](pcaps/NASHUA.zip) | 91M | 2020-04-30235600 |
 
