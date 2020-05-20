@@ -1,0 +1,35 @@
+title: Data from Local System, Data Compressed, Data Encrypted, Exfiltration Over Alternative Protocol
+author: Greg Howell
+date: 2020/04/05
+references:
+    - https://github.com/OTRF/detection-hackathon-apt29/issues/17
+tags:
+    - attack.data_exfiltration
+    - attack.t1002
+    - attack.t1005
+    - attack.t1022
+logsource:
+    product: zeek
+    service: files
+    service: http
+detection:
+    selection1:
+        uri:
+         - '*.7z'
+         - '*.zip'
+         - '*.rar'
+    selection2:
+        mime_types: '*compressed'
+    selection3:
+        filetype: '*compressed'
+    selection4:
+        http.bodyMagic: '*compressed'
+    selection5:
+       dst.ip: 
+        - 192.168.0.0/16
+        - 172.16.0.0/12
+        - 10.0.0.0/8
+    condition: selection1 and selection2 or selection3 or selection4 and not selection5
+falsepositives:
+    - nothing observed so far
+level: high
