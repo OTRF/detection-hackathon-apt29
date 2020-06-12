@@ -1,0 +1,33 @@
+id: 9ec79733-eb61-42fd-b7c2-94e1f4b1d791
+name: New Service Installation Remotely
+description: |
+    Adversaries may execute a binary, command, or script via a method that interacts with Windows services, such as the Service Control Manager.
+    This can be done by by adversaries creating a new service.
+    Adversaries can create services remotely to execute code and move lateraly across the environment.
+    References:
+    https://threathunterplaybook.com/notebooks/windows/08_lateral_movement/lateral_movement/WIN-190815181010.html
+    https://github.com/OTRF/detection-hackathon-apt29/issues/20 
+requiredDataConnectors:
+  - connectorId: SecurityEvents
+    dataTypes:
+      - SecurityEvent
+tactics:
+  - Persistence
+  - Privilege Escalation
+  - Lateral Movement
+query: |
+  let end = startofday(now());
+  let start = end - 7d;
+  SecurityEvent
+  | where TimeGenerated >= start and TimeGenerated <= end
+  | where EventID == 4697
+  | project LogonId=SubjectLogonId, ServiceName, ServiceFileName, SubjectUserName
+  | join kind=inner (
+  SecurityEvent
+  | where TimeGenerated >= start and TimeGenerated <= end
+  | where EventID == 4624 and LogonType == 3
+  | where AccountType == 'User'
+  | where IpAddress != "-"
+  | project LogonId=TargetLogonId, IpAddress
+  ) on LogonId
+  | project Computer, ServiceName, ServiceFileName, SubjectUserName, IpAddress

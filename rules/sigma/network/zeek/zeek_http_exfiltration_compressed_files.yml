@@ -1,5 +1,5 @@
-title: Data from Local System, Data Compressed, Data Encrypted, Exfiltration Over Alternative Protocol
-author: Greg Howell
+title: Potential exfiltration of compressed files
+author: Greg Howell, OTR (Open Threat Research)
 date: 2020/04/05
 references:
     - https://github.com/OTRF/detection-hackathon-apt29/issues/17
@@ -25,11 +25,8 @@ detection:
     selection4:
         http.bodyMagic: '*compressed'
     selection5:
-       dst.ip: 
-        - 192.168.0.0/16
-        - 172.16.0.0/12
-        - 10.0.0.0/8
-    condition: selection1 and selection2 or selection3 or selection4 and not selection5
+        http.method: PUT
+    condition: selection1 and selection2 and selection5 or selection3 and selection5 or selection4 and selection5
 falsepositives:
     - nothing observed so far
-level: high
+level: medium

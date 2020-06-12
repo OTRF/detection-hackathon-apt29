@@ -1,0 +1,26 @@
+title: Potential COM hijacking with DelegateExecute
+id: 9c5c694b-9246-4888-98b0-1d8933f8b880
+status: experimental
+description: A General detection to trigger for "DelegateExecute" being set to identify the code that will be invoked by the open command (HKU\Classes\Folder\shell\open\command\) of a COM object.
+references:
+    - https://github.com/OTRF/detection-hackathon-apt29/issues/6
+    - https://threathunterplaybook.com/evals/apt29/detections/3.B.1_04EB334D-A304-40D9-B177-0BB6E95FC23E.html
+    - https://docs.microsoft.com/en-us/windows/win32/shell/launch
+    - https://docs.microsoft.com/en-us/windows/win32/api/shobjidl_core/nn-shobjidl_core-iexecutecommand
+    - https://docs.microsoft.com/en-us/windows/win32/shell/shell-and-managed-code
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/05/02
+tags:
+    - attack.defense_evasion
+    - attack.t1122
+logsource:
+    product: windows
+    service: sysmon
+detection:
+    selection:
+        EventID: 13
+        TargetObject|endswith: '\shell\open\command\DelegateExecute'
+    condition: selection
+falsepositives:
+    - unknown
+level: medium

@@ -1,0 +1,33 @@
+id: fbd4d333-f9d3-4f84-8ca2-b0301e9dd26a
+name: Handle Requested to SAM Domain objects remotely
+description: |
+  Adversaries can leverage domain users (non *$) and request handles to SAM_DOMAIN objects in the DC.
+  This can be correlated with network logon sessions created by the user performing the handle request action remotely.
+  This could be an indicator of compromised domain users performing recon activities in the network.
+  References:
+    https://threathunterplaybook.com/evals/apt29/detections/4.C.9_FA458669-1C94-4150-AFFC-A3236FC6B275.html 
+requiredDataConnectors:
+  - connectorId: SecurityEvents
+    dataTypes:
+      - SecurityEvent
+tactics:
+  - Discovery
+query: |
+  let end = startofday(now());
+  let start = end - 7d;
+  SecurityEvent
+  | where TimeGenerated >= start and TimeGenerated <= end
+  | where EventID == 4661 
+    and ObjectType == 'SAM_DOMAIN'
+    and AccountType == 'User'
+    and AccessMask == '0x20094'
+  | project LogonId=SubjectLogonId, SubjectUserName, AccessList, Properties
+  | join kind=inner (
+  SecurityEvent
+  | where TimeGenerated >= start and TimeGenerated <= end
+  | where EventID == 4624 and LogonType == 3
+  | where AccountType == 'User'
+  | where IpAddress != "-"
+  | project LogonId=TargetLogonId, IpAddress
+  ) on LogonId
+  | project Computer, SubjectUserName, AccessList, Properties, IpAddress

@@ -1,0 +1,35 @@
+title: Suspicious Secondary Logon Service
+id: eff79d55-14f5-4d7b-a80d-cb86bb64eb2a
+status: experimental
+description: A General detection for events around the secondary logon service. This could be an indicator of impersonation.
+references:
+    - https://github.com/OTRF/detection-hackathon-apt29/issues/25
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/05/02
+tags:
+    - attack.defense_evasion
+    - attack.privilege_escalation
+    - attack.t1134
+logsource:
+    product: windows
+    service: sysmon
+detection:
+    selection1:
+        EventID: 13
+        Details: 'Secondary Logon'
+    selection2:
+        EventID: 1
+        OriginalFileName: 'svchost.exe'
+        CommandLine|contains: '-s seclogon'
+    selection3:
+        EventID: 7
+        OriginalFileName: 'SECLOGON.EXE'
+        ImageLoaded|endswith: 'seclogon.dll'
+    selection4:
+        EventID: 10
+        SourceImage|endswith: 'svchost.exe'
+        CallTrace|contains: 'seclogon.dll'
+    condition: selection1 or selection2 or selection3 or selection4
+falsepositives:
+    - unknown
+level: medium

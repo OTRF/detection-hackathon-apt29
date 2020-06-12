@@ -1,0 +1,25 @@
+title: High integrity Sdclt Process
+id: c9a00fc6-cdce-45c4-b7aa-659bb97167d1
+status: experimental
+description: A General detection for sdclt being spawned as an elevated process. This could be an indicator of sdclt being used for bypass UAC techniques.
+references:
+    - https://github.com/OTRF/detection-hackathon-apt29/issues/6
+    - https://threathunterplaybook.com/evals/apt29/detections/3.B.2_C36B49B5-DF58-4A34-9FE9-56189B9DEFEA.html
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/05/02
+tags:
+    - attack.privilege_escalation
+    - attack.t1088
+logsource:
+    product: windows
+    service: security
+detection:
+    selection:
+        EventID: 4688
+        NewProcessName|endswith: 'sdclt.exe'
+        MandatoryLabel: 'S-1-16-12288'
+        TokenElevationType: '%%1937'
+    condition: selection
+falsepositives:
+    - unknown
+level: medium

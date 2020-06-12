@@ -1,0 +1,24 @@
+title: Suspicious Secondary Logon Service
+id: f67b7043-1c53-4453-8564-a5fa11e15c17
+status: experimental
+description: A General detection for svchost.exe spawned with seclogon arguments. This could be an indicator of impersonation.
+references:
+    - https://github.com/OTRF/detection-hackathon-apt29/issues/25
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+date: 2020/05/02
+tags:
+    - attack.defense_evasion
+    - attack.privilege_escalation
+    - attack.t1134
+logsource:
+    product: windows
+    service: security
+detection:
+    selection:
+        EventID: 4688
+        NewProcessName|endswith: 'svchost.exe'
+        CommandLine|contains: '-s seclogon'
+    condition: selection
+falsepositives:
+    - unknown
+level: medium
