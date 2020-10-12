@@ -1,15 +1,15 @@
 title: Suspicious Secondary Logon Service
 id: eff79d55-14f5-4d7b-a80d-cb86bb64eb2a
-status: experimental
 description: A General detection for events around the secondary logon service. This could be an indicator of impersonation.
-references:
-    - https://github.com/OTRF/detection-hackathon-apt29/issues/25
-author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
+status: experimental
 date: 2020/05/02
+author: Roberto Rodriguez (Cyb3rWard0g), OTR (Open Threat Research)
 tags:
     - attack.defense_evasion
     - attack.privilege_escalation
-    - attack.t1134
+    - attack.t1134.002
+references:
+    - https://github.com/OTRF/detection-hackathon-apt29/issues/25
 logsource:
     product: windows
     service: sysmon

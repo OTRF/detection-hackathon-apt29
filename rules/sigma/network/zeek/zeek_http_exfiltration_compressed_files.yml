@@ -1,13 +1,13 @@
 title: Potential exfiltration of compressed files
-author: Greg Howell, OTR (Open Threat Research)
+id: 0d47e3f6-357f-4534-928c-202631d065fa
 date: 2020/04/05
-references:
-    - https://github.com/OTRF/detection-hackathon-apt29/issues/17
+author: Greg Howell, OTR (Open Threat Research)
 tags:
     - attack.data_exfiltration
-    - attack.t1002
+    - attack.t1560.001
     - attack.t1005
-    - attack.t1022
+references:
+    - https://github.com/OTRF/detection-hackathon-apt29/issues/17
 logsource:
     product: zeek
     service: files
